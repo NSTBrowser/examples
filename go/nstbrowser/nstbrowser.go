@@ -29,7 +29,7 @@ func (opt *Option) parseQuery() string {
   }
   if opt.launchConfig != nil {
     marshal, _ := json.Marshal(opt.launchConfig)
-    queryEscape := url.QueryEscape(string(marshal))
+    queryEscape := string(marshal)
     values.Add("config", queryEscape)
   }
   return values.Encode()
