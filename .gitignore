@@ -22,3 +22,9 @@
 go.work
 
 .idea
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico

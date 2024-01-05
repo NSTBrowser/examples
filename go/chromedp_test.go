@@ -1,21 +1,22 @@
-package nstbrowser
+package _go
 
 import (
   "context"
   "fmt"
   "github.com/chromedp/chromedp"
+  "go-chromedp/nstbrowser"
   "log"
   "os"
   "testing"
 )
 
 func TestGetConnectToLaunchedBrowserURL(t *testing.T) {
-  option := Option{
+  option := nstbrowser.Option{
     Host:   "192.168.50.64",
     Port:   8838,
     ApiKey: "896bf156-4f47-45ff-b79b-6c8597534eec",
   }
-  ws, err := GetConnectToLaunchedBrowserWS(option, "b2dc29e1-3982-49e5-a2ba-0d80f27601fd")
+  ws, err := nstbrowser.GetConnectToLaunchedBrowserWS(option, "b2dc29e1-3982-49e5-a2ba-0d80f27601fd")
   if err != nil {
     t.Fatal(err)
   }
@@ -25,13 +26,13 @@ func TestGetConnectToLaunchedBrowserURL(t *testing.T) {
 }
 
 func TestGetLaunchAndConnectToBrowserURL(t *testing.T) {
-  option := Option{
+  option := nstbrowser.Option{
     Host:   "192.168.50.64",
     Port:   8838,
     ApiKey: "896bf156-4f47-45ff-b79b-6c8597534eec",
   }
-  ws, err := GetLaunchAndConnectToBrowserWS(option, "b2dc29e1-3982-49e5-a2ba-0d80f27601fd",
-    WithHeadless(),
+  ws, err := nstbrowser.GetLaunchAndConnectToBrowserWS(option, "b2dc29e1-3982-49e5-a2ba-0d80f27601fd",
+    nstbrowser.WithHeadless(),
   )
   if err != nil {
     t.Fatal(err)
@@ -41,27 +42,27 @@ func TestGetLaunchAndConnectToBrowserURL(t *testing.T) {
 }
 
 func TestGetCreateAndConnectToBrowserWS(t *testing.T) {
-  option := Option{
+  option := nstbrowser.Option{
     Host:   "192.168.50.64",
     Port:   8838,
     ApiKey: "896bf156-4f47-45ff-b79b-6c8597534eec",
   }
 
-  fingerprint := &Fingerprint{
+  fingerprint := &nstbrowser.Fingerprint{
     Name:                "Test_Once",
-    Platform:            PlatformWindows,
-    Kernel:              KernelChromium,
-    KernelMilestone:     KernelMilestone113,
+    Platform:            nstbrowser.PlatformWindows,
+    Kernel:              nstbrowser.KernelChromium,
+    KernelMilestone:     nstbrowser.KernelMilestone113,
     HardwareConcurrency: 4,
     DeviceMemory:        8,
     Proxy:               "",
   }
 
-  ws, err := GetCreateAndConnectToBrowserURL(option,
-    WithOnce(),
-    WithHeadless(),
-    WithAutoClose(),
-    WithFingerprint(fingerprint))
+  ws, err := nstbrowser.GetCreateAndConnectToBrowserURL(option,
+    nstbrowser.WithOnce(),
+    nstbrowser.WithHeadless(),
+    nstbrowser.WithAutoClose(),
+    nstbrowser.WithFingerprint(fingerprint))
   if err != nil {
     t.Fatal(err)
   }
